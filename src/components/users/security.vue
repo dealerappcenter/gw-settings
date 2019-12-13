@@ -1,6 +1,6 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
+        <tabs-menu slot="tab-menu" />
         <div slot="tab-content">
             <h5>Security</h5>
             <div class="row user-general-information">
@@ -8,8 +8,8 @@
                     <div class="form-group form-group-default required">
                         <label>Current password</label>
                         <input
-                            v-validate="'required'"
                             v-model="currentPassword"
+                            v-validate="'required'"
                             autocomplete="off"
                             class="form-control"
                             type="password"
@@ -22,8 +22,8 @@
                     <div class="form-group form-group-default required">
                         <label>New password</label>
                         <input
-                            v-validate="'required'"
                             v-model="newPassword"
+                            v-validate="'required'"
                             autocomplete="off"
                             class="form-control"
                             type="password"
@@ -35,8 +35,8 @@
                     <div class="form-group form-group-default required">
                         <label>Confirm new password</label>
                         <input
-                            v-validate="'required'"
                             v-model="confirmNewPassword"
+                            v-validate="'required'"
                             autocomplete="off"
                             class="form-control"
                             type="password"
@@ -48,7 +48,9 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end mt-2">
-                <button :disabled="isLoading" class="btn btn-primary" @click="update()">Change</button>
+                <button :disabled="isLoading" class="btn btn-primary" @click="update()">
+                    Change
+                </button>
             </div>
         </div>
     </container-template>

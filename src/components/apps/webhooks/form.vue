@@ -1,6 +1,6 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
+        <tabs-menu slot="tab-menu" />
         <div slot="tab-content" class="row webhooks-section">
             <div class="col">
                 <h5>{{ title }}</h5>
@@ -8,38 +8,41 @@
                     <div class="col-12 col-sm">
                         <label>Event</label>
                         <multiselect
-                            v-validate="'required:true'"
                             v-model="selectedWebhook"
+                            v-validate="'required:true'"
                             :options="webhooks"
                             data-vv-as="event"
                             data-vv-name="event"
                             label="name"
                             track-by="id"
-                            @input="setWebhook" />
+                            @input="setWebhook"
+                        />
                         <span class="text-danger">{{ errors.first("event") }}</span>
                     </div>
                     <div class="col-12 col-sm">
                         <label>Format</label>
                         <multiselect
-                            v-validate="'required:true'"
                             v-model="selectedFormat"
+                            v-validate="'required:true'"
                             :show-labels="false"
                             :options="webhooksFormats"
                             data-vv-as="webhook format"
                             data-vv-name="webhook format"
-                            @input="setFormat" />
+                            @input="setFormat"
+                        />
                         <span class="text-danger">{{ errors.first("webhook format") }}</span>
                     </div>
                     <div class="col-12 col-sm">
                         <label>Method</label>
                         <multiselect
-                            v-validate="'required:true'"
                             v-model="selectedMethod"
+                            v-validate="'required:true'"
                             :show-labels="false"
                             :options="webhooksMethods"
                             data-vv-as="method"
                             data-vv-name="method"
-                            @input="setWebhookMethod" />
+                            @input="setWebhookMethod"
+                        />
                         <span class="text-danger">{{ errors.first("method") }}</span>
                     </div>
                 </div>
@@ -48,24 +51,26 @@
                         <div class="form-group  required">
                             <label>URL</label>
                             <input
-                                v-validate="'required:true|url:require_protocol'"
                                 v-model="webhookData.url"
+                                v-validate="'required:true|url:require_protocol'"
                                 data-vv-as="url"
                                 data-vv-name="url"
                                 class="form-control"
                                 type="text"
-                                name="url">
-                            <span
-                                class="text-danger"> {{ errors.first('url') }}</span>
+                                name="url"
+                            >
+                            <span class="text-danger">{{ errors.first('url') }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 col-xl d-flex justify-content-end mt-2">
-                        <div class="col-12 col-xl d-flex justify-content-end mt-2">
-                            <button :disabled="isLoading" class="btn btn-danger m-r-10" @click="triggerCancel">Cancel</button>
-                            <button :disabled="isLoading" class="btn btn-primary" @click="verifyFields">Save</button>
-                        </div>
+                        <button :disabled="isLoading" class="btn btn-danger mr-2" @click="triggerCancel">
+                            Cancel
+                        </button>
+                        <button :disabled="isLoading" class="btn btn-primary" @click="verifyFields">
+                            Save
+                        </button>
                     </div>
                 </div>
             </div>
@@ -131,11 +136,11 @@ export default {
         "webhookData.method"() {
             this.setInitialMethod();
         },
-        "route.params.id"(){
+        "route.params.id"() {
             //this.getUserWebhook();
         },
         "webhooks":{
-            handler(){
+            handler() {
                 this.setInitialWebhook();
             },
             deep:true
@@ -143,6 +148,7 @@ export default {
     },
     mounted() {
         this.getWebhooks();
+
         if (this.isEditWebhook) {
             this.getUserWebhook();
         }
@@ -167,9 +173,8 @@ export default {
             this.selectedWebhook = this.webhooks.find(webhook => webhook.id == this.webhookData.webhooks_id);
         },
         getUserWebhook() {
-            let url = `/user-webhooks/${this.$route.params.id}`;
             axios({
-                url
+                url: `/user-webhooks/${this.$route.params.id}`
             }).then(({
                 data
             }) => this.webhookData = data)
@@ -198,11 +203,9 @@ export default {
                 };
             }
             if (this.errors.items.length) {
-                let verificationMessage = this.errors.items[0].msg;
-                let verificationTitle = `Please verify the ${this.errors.items[0].field}`;
                 this.$notify({
-                    title: verificationTitle,
-                    text: verificationMessage,
+                    title: this.errors.items[0].msg,
+                    text: `Please verify the ${this.errors.items[0].field}`,
                     type: "warn"
                 });
             } else {
@@ -283,16 +286,17 @@ export default {
             Object.keys(this.webhookData).forEach((field) => {
                 data.append(field, this.webhookData[field]);
             });
+
             return data;
         },
-        getWebhooks(){
-            let url = `/webhooks`;
+        getWebhooks() {
             axios({
-                url
-            }).then(({
-                data
-            }) => this.webhooks = data)
-                .catch(() => this.webhooks= []);
+                url: "/webhooks"
+            }).then(({ data }) => {
+                this.webhooks = data;
+            }).catch(() => {
+                this.webhooks = [];
+            });
         }
     }
 }

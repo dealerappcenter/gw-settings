@@ -1,6 +1,6 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
+        <tabs-menu slot="tab-menu" />
         <div slot="tab-content" class="subscriptions-plans">
             <div class="generic_price_table">
                 <section v-if="plans.length" class="container pb-2">
@@ -47,9 +47,9 @@
                                                         <div class="form-group">
                                                             <label for="first-name">First name</label>
                                                             <input
-                                                                v-validate="'required:true|alpha_spaces|min:2'"
                                                                 id="first-name"
                                                                 v-model="contact.contact_first_name"
+                                                                v-validate="'required:true|alpha_spaces|min:2'"
                                                                 name="contact first name"
                                                                 type="text"
                                                                 class="form-control"
@@ -62,9 +62,9 @@
                                                         <div class="form-group">
                                                             <label for="last-name">Last name</label>
                                                             <input
-                                                                v-validate="'required:true|alpha_spaces|min:2'"
                                                                 id="last-name"
                                                                 v-model="contact.contact_last_name"
+                                                                v-validate="'required:true|alpha_spaces|min:2'"
                                                                 name="contact last name"
                                                                 type="text"
                                                                 class="form-control"
@@ -79,9 +79,9 @@
                                                         <div class="form-group">
                                                             <label for="company-name">Company name</label>
                                                             <input
-                                                                v-validate="'required:true'"
                                                                 id="company-name"
                                                                 v-model="contact.contact_company"
+                                                                v-validate="'required:true'"
                                                                 name="company name"
                                                                 type="text"
                                                                 class="form-control"
@@ -96,9 +96,9 @@
                                                         <div class="form-group">
                                                             <label for="email-address">Email address</label>
                                                             <input
-                                                                v-validate="'required:true|email'"
                                                                 id="email-address"
                                                                 v-model="contact.email"
+                                                                v-validate="'required:true|email'"
                                                                 name="contact email address"
                                                                 type="email"
                                                                 class="form-control"
@@ -122,9 +122,9 @@
                                                         <div class="form-group">
                                                             <label for="address">Address</label>
                                                             <input
-                                                                v-validate="'required:true|min:2'"
                                                                 id="address"
                                                                 v-model="address.address"
+                                                                v-validate="'required:true|min:2'"
                                                                 name="address"
                                                                 type="text"
                                                                 class="form-control"
@@ -137,9 +137,9 @@
                                                         <div class="form-group">
                                                             <label for="apt-suite">APT/SUITE</label>
                                                             <input
-                                                                v-validate="'required:true|min:1'"
                                                                 id="apt-suite"
                                                                 v-model="address.suite"
+                                                                v-validate="'required:true|min:1'"
                                                                 name="apt/suite"
                                                                 type="text"
                                                                 class="form-control"
@@ -154,9 +154,9 @@
                                                         <div class="form-group">
                                                             <label for="city">City</label>
                                                             <input
-                                                                v-validate="'required:true|min:3'"
                                                                 id="city"
                                                                 v-model="address.city"
+                                                                v-validate="'required:true|min:3'"
                                                                 name="city"
                                                                 type="text"
                                                                 class="form-control"
@@ -169,9 +169,9 @@
                                                         <div class="form-group">
                                                             <label for="country">Country</label>
                                                             <input
-                                                                v-validate="'required:true|min:3'"
                                                                 id="country"
                                                                 v-model="address.country"
+                                                                v-validate="'required:true|min:3'"
                                                                 name="country"
                                                                 type="text"
                                                                 class="form-control"
@@ -186,9 +186,9 @@
                                                         <div class="form-group">
                                                             <label for="state-province">State/Province</label>
                                                             <input
-                                                                v-validate="'required:true|min:2'"
                                                                 id="state-province"
                                                                 v-model="address.state"
+                                                                v-validate="'required:true|min:2'"
                                                                 name="state/province"
                                                                 type="text"
                                                                 class="form-control"
@@ -229,7 +229,7 @@
                                             </ul>
                                             <div class="tab-content">
                                                 <div id="credit-card" class="tab-pane active">
-                                                    <credit-card ref="creditCard" @striped-card="setCardToken"/>
+                                                    <credit-card ref="creditCard" @striped-card="setCardToken" />
                                                 </div>
                                                 <!-- <div id="paypal" class="tab-pane ">
                                                     <div class="row">
@@ -281,15 +281,17 @@ export default {
         PlansFrecuencies
     },
     filters: {
-        getPrice(value){
-            let isNumber = _.isNumber(Number(value));
+        getPrice(value) {
+            const isNumber = _.isNumber(Number(value));
             let data = 0;
-            if(value && isNumber){
-                data =  value.split(".")[0];
+
+            if (value && isNumber) {
+                data = value.split(".")[0];
             }
+
             return data;
         },
-        formatSetting(value){
+        formatSetting(value) {
             return _.startCase(value);
         }
     },
@@ -367,7 +369,7 @@ export default {
             this.getPlans();
             this.getFormDefaultData();
         },
-        getPlans(){
+        getPlans() {
             axios({
                 url: "/apps-plans?relationships=settings"
             }).then((response) => {
@@ -390,7 +392,7 @@ export default {
             this.plans = response.data;
         },
         prepareData(jsonData) {
-            let data = new FormData();
+            const data = new FormData();
 
             Object.keys(jsonData).forEach((field) => {
                 data.append(field, jsonData[field]);
@@ -445,12 +447,9 @@ export default {
         },
         verifyPlanPayment() {
             if (this.errors.items.length) {
-                let verificationMessage = this.errors.items[0].msg;
-                let verificationTitle = `Please verify the ${this.errors.items[0].field}`;
-
                 this.$notify({
-                    title: verificationTitle,
-                    text: verificationMessage,
+                    title: this.errors.items[0].msg,
+                    text: `Please verify the ${this.errors.items[0].field}`,
                     type: "warn"
                 });
             } else {
@@ -530,8 +529,8 @@ export default {
                 contact_last_name : "lastname"
             };
 
-            this.contact.contact_company =  this.defaultCompany.name;
-            Object.keys(formKeys).forEach(key=> this.contact[key] = this.userData[formKeys[key]]);
+            this.contact.contact_company = this.defaultCompany.name;
+            Object.keys(formKeys).forEach(key => this.contact[key] = this.userData[formKeys[key]]);
         }
     }
 }

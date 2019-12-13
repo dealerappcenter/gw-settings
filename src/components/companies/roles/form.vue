@@ -1,89 +1,87 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
-        <div slot="tab-content" class="row">
-            <div class="col">
-                <h5>
-                    Create a new Role
-                    <button v-if="!isEditing" class="btn btn-primary" @click="cloneRole()">
-                        Clone role
-                    </button>
-                </h5>
-                <!-- Role Form-->
-                <form class="row" role="form">
-                    <div class="col-md-6">
-                        <div class="form-group form-group-default required">
-                            <label>Name role</label>
-                            <input
-                                v-validate="'required'"
-                                v-model="roleData.name"
-                                name="name"
-                                type="text"
-                                class="form-control"
-                            >
-                            <span class="text-danger">{{ errors.first("name") }}</span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group form-group-default">
-                            <label>Description</label>
-                            <input
-                                v-validate=""
-                                v-model="roleData.description"
-                                type="text"
-                                name="description"
-                                class="form-control"
-                            >
-                            <span class="text-danger">{{ errors.first("description") }}</span>
-                        </div>
-                    </div>
-                </form>
-
-                <!-- Role Select -->
-                <div class="row">
-                    <div v-if="accessGroup" class="col-6">
-                        <div
-                            class="card-group horizontal"
-                            role="tablist"
-                            aria-multiselectable="true"
+        <tabs-menu slot="tab-menu" />
+        <div slot="tab-content">
+            <h5>
+                Create a new Role
+                <button v-if="!isEditing" class="btn btn-primary" @click="cloneRole()">
+                    Clone role
+                </button>
+            </h5>
+            <!-- Role Form-->
+            <form class="row" role="form">
+                <div class="col-md-6">
+                    <div class="form-group form-group-default required">
+                        <label>Name role</label>
+                        <input
+                            v-model="roleData.name"
+                            v-validate="'required'"
+                            name="name"
+                            type="text"
+                            class="form-control"
                         >
-                            <div v-for="(group, groupName) in accessGroup" :key="groupName" class="card card-default m-b-0">
-                                <div id="headingOne" class="card-header " role="tab">
-                                    <h4 class="card-title access-group__title">
-                                        <div class="checkbox check-success">
-                                            <input
-                                                :id="`group-${groupName}`"
-                                                v-model="group.isGroupSelected"
-                                                type="checkbox"
-                                                @click="checkGroup(group, groupName)"
-                                            >
-                                            <label :for="`group-${groupName}`"/>
-                                        </div>
-                                        <a href="#" @click="checkGroup(group, groupName)">
-                                            {{ groupName }}
-                                            <i class="fa fa-minus-circle" @click.stop="toggleCollapse(groupName)" />
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div :id="`collapse-${groupName}`">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div v-for="(access, accessName) in group.permissions" :key="`${groupName}-${accessName}`" class="col-md-6">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label :for="`checkbox-${groupName}-${accessName}`">{{ accessName | capitalize }}</label>
-                                                    </div>
-                                                    <div class="col-xs-1">
-                                                        <div class="checkbox check-success">
-                                                            <input
-                                                                :id="`checkbox-${groupName}-${accessName}`"
-                                                                :name="`checkbox-${groupName}-${accessName}`"
-                                                                v-model="access.allowed"
-                                                                type="checkbox"
-                                                                @change="checkSelectedGroup(groupName, true)"
-                                                            >
-                                                            <label :for="`checkbox-${groupName}-${accessName}`"/>
-                                                        </div>
+                        <span class="text-danger">{{ errors.first("name") }}</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group form-group-default">
+                        <label>Description</label>
+                        <input
+                            v-model="roleData.description"
+                            v-validate=""
+                            type="text"
+                            name="description"
+                            class="form-control"
+                        >
+                        <span class="text-danger">{{ errors.first("description") }}</span>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Role Select -->
+            <div class="row">
+                <div v-if="accessGroup" class="col-6">
+                    <div
+                        class="card-group horizontal"
+                        role="tablist"
+                        aria-multiselectable="true"
+                    >
+                        <div v-for="(group, groupName) in accessGroup" :key="groupName" class="card card-default m-b-0">
+                            <div id="headingOne" class="card-header " role="tab">
+                                <h4 class="card-title access-group__title">
+                                    <div class="checkbox check-success">
+                                        <input
+                                            :id="`group-${groupName}`"
+                                            v-model="group.isGroupSelected"
+                                            type="checkbox"
+                                            @click="checkGroup(group, groupName)"
+                                        >
+                                        <label :for="`group-${groupName}`" />
+                                    </div>
+                                    <a href="#" @click="checkGroup(group, groupName)">
+                                        {{ groupName }}
+                                        <i class="fa fa-minus-circle" @click.stop="toggleCollapse(groupName)" />
+                                    </a>
+                                </h4>
+                            </div>
+                            <div :id="`collapse-${groupName}`">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div v-for="(access, accessName) in group.permissions" :key="`${groupName}-${accessName}`" class="col-md-6">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label :for="`checkbox-${groupName}-${accessName}`">{{ accessName | capitalize }}</label>
+                                                </div>
+                                                <div class="col-xs-1">
+                                                    <div class="checkbox check-success">
+                                                        <input
+                                                            :id="`checkbox-${groupName}-${accessName}`"
+                                                            v-model="access.allowed"
+                                                            :name="`checkbox-${groupName}-${accessName}`"
+                                                            type="checkbox"
+                                                            @change="checkSelectedGroup(groupName, true)"
+                                                        >
+                                                        <label :for="`checkbox-${groupName}-${accessName}`" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -94,11 +92,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12 col-xl d-flex justify-content-end mt-2">
-                        <button class="btn btn-danger m-r-10" @click="rolesList()">Cancel</button>
-                        <button :disabled="!hasChanged" class="btn btn-primary" @click="verifyFields()">Save</button>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-xl d-flex justify-content-end mt-2">
+                    <button class="btn btn-danger mr-2" @click="rolesList()">
+                        Cancel
+                    </button>
+                    <button :disabled="!hasChanged" class="btn btn-primary" @click="verifyFields()">
+                        Save
+                    </button>
                 </div>
             </div>
         </div>
@@ -211,12 +213,12 @@ export default {
                         access.allowed = "1";
                         access.role_name = "";
                     });
-                    role = {name: "", description: ""}
+                    role = { name: "", description: "" }
                 } else {
                     role = await this.getRoleData(roleId);
                 }
 
-                let accessesTemplate = await this.getAccess(role);
+                const accessesTemplate = await this.getAccess(role);
                 let accessList = this.mergeAccesses(data, accessesTemplate);
                 accessList = this.formatAccesses(accessList);
                 this.formatRole(accessList, role);
@@ -225,29 +227,33 @@ export default {
         getAccess(role) {
             return axios({
                 url: "/permissions-resources-access"
-            }).then(({data}) => {
+            }).then(({ data }) => {
                 return this.formatAccesses(data, role);
-            })
+            });
         },
         mergeAccesses(accessList, accessesTemplate) {
             accessesTemplate.forEach(access => {
                 const localAccess = this.findLocalAccess(accessList, access);
+
                 if (!localAccess) {
-                    accessList.push(access)
+                    accessList.push(access);
                 }
-            })
+            });
+
             return accessList;
         },
         findLocalAccess(accessList, access) {
-            return  accessList.find(permission => access.access_name == permission.access_name &&  access.resources_name == permission.resources_name);
+            return accessList.find((permission) => {
+                return access.access_name == permission.access_name && access.resources_name == permission.resources_name;
+            });
         },
         formatRole(accessList, role) {
-            this.accessListData =  _.sortBy(accessList, ["resources_name", "access_name"]);
+            this.accessListData = _.sortBy(accessList, ["resources_name", "access_name"]);
             this.roleData = role;
             this.groupPermissions();
             this.checkSelectedGroups();
         },
-        formatAccesses(accesList, role ) {
+        formatAccesses(accesList, role) {
             return accesList.map(access => {
                 if (role) {
                     delete access.resources_id;
@@ -264,7 +270,7 @@ export default {
             this.accessListData.forEach(access => {
                 if (access.access_name != "*") {
                     if (!accessGroup[access.resources_name]) {
-                        accessGroup[access.resources_name] = {permissions: {[access.access_name]: access}};
+                        accessGroup[access.resources_name] = { permissions: { [access.access_name]: access } };
                     } else {
                         accessGroup[access.resources_name]["permissions"][access.access_name] = access;
                     }
@@ -303,12 +309,9 @@ export default {
             }
 
             if (this.errors.items.length) {
-                let verificationMessage = this.errors.items[0].msg;
-                let verificationTitle = `Please verify the ${this.errors.items[0].field}`;
-
                 this.$notify({
-                    title: verificationTitle,
-                    text: verificationMessage,
+                    title: this.errors.items[0].msg,
+                    text: `Please verify the ${this.errors.items[0].field}`,
                     type: "warn"
                 });
             } else {

@@ -1,6 +1,6 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
+        <tabs-menu slot="tab-menu" />
         <div slot="tab-content" class="socials-connect">
             <div class="social-connect google">
                 <img src="/img/google-g.png" alt="">

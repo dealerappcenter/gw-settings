@@ -94,9 +94,13 @@
 import { mapState } from "vuex";
 import { CardNumber, CardExpiry, CardCvc, PostalCode, createToken } from "vue-stripe-elements-plus";
 import creditcardNetworks from "./card-networks";
+import { VTooltip } from "v-tooltip";
 
 export default {
     name: "Card",
+    directives: {
+        tooltip: VTooltip
+    },
     components: {
         CardNumber,
         CardExpiry,
@@ -194,37 +198,37 @@ export default {
 
 
 <style lang="scss">
-    .add-credit-card-form {
-        display: flex;
-        flex-wrap: wrap;
+.add-credit-card-form {
+    display: flex;
+    flex-wrap: wrap;
 
-        > div {
-            padding-left: 5px;
-            padding-right: 5px;
-            min-width: 80px;
-            flex-basis: 0;
-            flex-grow: 1;
-            max-width: 100%;
-            margin-bottom: 20px;
-        }
+    > div {
+        padding-left: 5px;
+        padding-right: 5px;
+        min-width: 80px;
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
 
-        .card-number {
-            flex-basis: 240px;
-            min-width: 240px;
-        }
+    .card-number {
+        flex-basis: 240px;
+        min-width: 240px;
+    }
 
-        .form-group {
-            .form-control {
-                display: flex;
-                align-items: center;
+    .form-group {
+        .form-control {
+            display: flex;
+            align-items: center;
 
-                .StripeElement  {
-                    width: 100%;
-                }
-                &.is-danger {
-                    border: 1px solid #d0021b;
-                }
+            .StripeElement  {
+                width: 100%;
+            }
+            &.is-danger {
+                border: 1px solid #d0021b;
             }
         }
     }
+}
 </style>

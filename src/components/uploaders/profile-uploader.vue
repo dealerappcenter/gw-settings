@@ -21,7 +21,8 @@
                 :uppy-config="uppyConfig"
                 modal-button
                 @uploaded="uploaded"
-                @upload-error="onError" />
+                @upload-error="onError"
+            />
         </div>
     </div>
 </template>

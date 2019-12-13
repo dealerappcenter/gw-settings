@@ -1,56 +1,54 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
-        <div slot="tab-content" class="row custom-fields-settings">
-            <div class="col">
-                <h5>
-                    Custom Fields
-                    <router-link :to="{ name: 'settingsAppsCustomFieldsForm', params: { module: selectedModule.name } }" class="btn btn-primary">
-                        Create
-                    </router-link>
-                </h5>
-                <div class="card card-borderless">
-                    <ul class="nav nav-tabs nav-tabs-simple" role="tablist" data-init-reponsive-tabs="dropdownfx">
-                        <li v-for="module in modules" :key="'modules-' + module.id" class="nav-item">
-                            <a
-                                :class="{ active: selectedModule.name == module.name }"
-                                href="#"
-                                @click.prevent="changeModule(module)"
-                            >
-                                {{ module.name.replace("_", " ") }}
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="table-responsive">
-                                        <vuetable
-                                            v-if="selectedModule.id"
-                                            ref="CustomFieldsTable"
-                                            :append-params="appendParams"
-                                            :fields="tableFields"
-                                            :http-fetch="getCustomFields"
-                                            api-url=""
-                                            class="table table-hover table-condensed"
-                                            data-path=""
-                                            pagination-path=""
-                                        >
-                                            <template slot="actions" slot-scope="props">
-                                                <button class="btn btn-complete m-l-5" @click="editCustomField(props.rowData.id)">
-                                                    <i class="fa fa-edit" aria-hidden="true"/>
-                                                </button>
-                                                <button
-                                                    class="btn btn-danger m-l-5"
-                                                    @click="confirmDelete(props.rowData.id)"
-                                                >
-                                                    <i class="fa fa-trash" aria-hidden="true" />
-                                                </button>
-                                            </template>
-                                        </vuetable>
-                                    </div>
-                                </div>
+        <tabs-menu slot="tab-menu" />
+        <div slot="tab-content" class="custom-fields-settings">
+            <h5>
+                Custom Fields
+                <router-link :to="{ name: 'settingsAppsCustomFieldsForm', params: { module: selectedModule.name } }" class="btn btn-primary">
+                    Create
+                </router-link>
+            </h5>
+            <ul class="nav nav-tabs nav-horizontal">
+                <li v-for="module in modules" :key="'modules-' + module.id" class="nav-item">
+                    <a
+                        :class="{ active: selectedModule.name == module.name }"
+                        href="#"
+                        @click.prevent="changeModule(module)"
+                    >
+                        {{ module.name.replace("_", " ") }}
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <vuetable
+                                    v-if="selectedModule.id"
+                                    ref="CustomFieldsTable"
+                                    :append-params="appendParams"
+                                    :fields="tableFields"
+                                    :http-fetch="getCustomFields"
+                                    api-url=""
+                                    class="table table-hover table-condensed"
+                                    data-path=""
+                                    pagination-path=""
+                                >
+                                    <template slot="actions" slot-scope="props">
+                                        <div class="d-flex align-items-center justify-content-end">
+                                            <button class="btn btn-primary m-l-5" @click="editCustomField(props.rowData.id)">
+                                                <i class="fa fa-edit" aria-hidden="true" />
+                                            </button>
+                                            <button
+                                                class="btn btn-danger m-l-5"
+                                                @click="confirmDelete(props.rowData.id)"
+                                            >
+                                                <i class="fa fa-trash" aria-hidden="true" />
+                                            </button>
+                                        </div>
+                                    </template>
+                                </vuetable>
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
+        <tabs-menu slot="tab-menu" />
         <div slot="tab-content">
             <h5>Company Profile</h5>
             <div class="row company-general-information">
@@ -19,8 +19,8 @@
                             <div class="form-group form-group-default required">
                                 <label>Name</label>
                                 <input
-                                    v-validate="'required'"
                                     v-model="companyData.name"
+                                    v-validate="'required'"
                                     name="name"
                                     type="text"
                                     class="form-control"
@@ -30,8 +30,8 @@
                             <div class="form-group form-group-default required">
                                 <label>Address</label>
                                 <input
-                                    v-validate="'required'"
                                     v-model="companyData.address"
+                                    v-validate="'required'"
                                     data-vv-as="company address"
                                     name="company-address"
                                     type="text"
@@ -42,8 +42,8 @@
                             <div class="form-group form-group-default required">
                                 <label>Zip Code</label>
                                 <input
-                                    v-validate="'required|numeric'"
                                     v-model="companyData.zipcode"
+                                    v-validate="'required|numeric'"
                                     class="form-control"
                                     type="number"
                                     data-vv-as="zip code"
@@ -54,8 +54,8 @@
                             <div class="form-group form-group-default">
                                 <label>Email</label>
                                 <input
-                                    v-validate="'required|email'"
                                     v-model="companyData.email"
+                                    v-validate="'required|email'"
                                     class="form-control"
                                     name="email"
                                     type="email"
@@ -65,8 +65,8 @@
                             <div class="form-group form-group-default required">
                                 <label>Phone</label>
                                 <input
-                                    v-validate="'required|numeric'"
                                     v-model="companyData.phone"
+                                    v-validate="'required|numeric'"
                                     data-vv-as="phone number"
                                     name="phone"
                                     type="phone"
@@ -84,9 +84,9 @@
                             <div class="form-group">
                                 <label>Language</label>
                                 <multiselect
-                                    v-validate="'required'"
                                     v-if="initializeComplete"
                                     v-model="selectedLanguage"
+                                    v-validate="'required'"
                                     :allow-empty="false"
                                     :options="languages"
                                     :show-labels="false"
@@ -101,9 +101,9 @@
                             <div class="form-group">
                                 <label>Timezone</label>
                                 <multiselect
-                                    v-validate="'required'"
                                     v-if="initializeComplete"
                                     v-model="companyData.timezone"
+                                    v-validate="'required'"
                                     :max-height="175"
                                     :options="timezones"
                                     :show-labels="false"
@@ -115,9 +115,9 @@
                             <div class="form-group">
                                 <label>Currency</label>
                                 <multiselect
-                                    v-validate="'required'"
                                     v-if="initializeComplete"
                                     v-model="selectedCurrency"
+                                    v-validate="'required'"
                                     :allow-empty="false"
                                     :max-height="175"
                                     :custom-label="currencyLabel"
@@ -152,7 +152,6 @@ import { mapState } from "vuex";
 import vueRouterMixins from "../../mixins/vueRouterMixins";
 import clone from "lodash/clone";
 import ContainerTemplate from "../../container";
-import DashboardUploader from "../uploaders/dashboard-file-uploader";
 import TabsMenu from "./tabs";
 import ProfileUploader from "../uploaders/profile-uploader";
 
@@ -161,7 +160,6 @@ export default {
     components: {
         ProfileUploader,
         ContainerTemplate,
-        DashboardUploader,
         TabsMenu
     },
     mixins: [
@@ -267,7 +265,7 @@ export default {
                 url: `/companies/${this.companyData.id}`,
                 method: "PUT",
                 data: formData
-            }).then(({data}) => {
+            }).then(({ data }) => {
                 this.$store.dispatch("Company/updateData", data.id);
                 this.$notify({
                     title: "Confirmation",

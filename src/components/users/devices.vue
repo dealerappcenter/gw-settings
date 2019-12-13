@@ -1,32 +1,33 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
-        <div slot="tab-content" class="row">
-            <div class="col">
-                <h5>
-                    Devices
-                </h5>
-                <div class="table-responsive">
-                    <vuetable
-                        ref="DevicesList"
-                        :append-params="appendParams"
-                        :fields="branchesFields"
-                        :http-fetch="getTableData"
-                        :transform="transformData"
-                        track-by="id"
-                        api-url="/devices"
-                        class="table table-hover table-condensed"
-                        pagination-path=""
-                    >
-                        <template slot="actions" slot-scope="props">
+        <tabs-menu slot="tab-menu" />
+        <div slot="tab-content">
+            <h5>
+                Devices
+            </h5>
+            <div class="table-responsive">
+                <vuetable
+                    ref="DevicesList"
+                    :append-params="appendParams"
+                    :fields="branchesFields"
+                    :http-fetch="getTableData"
+                    :transform="transformData"
+                    track-by="id"
+                    api-url="/devices"
+                    class="table table-hover table-condensed"
+                    pagination-path=""
+                >
+                    <template slot="actions" slot-scope="props">
+                        <div class="d-flex align-items-center justify-content-end">
                             <button
                                 class="btn btn-danger m-l-5"
-                                @click="confirmDelete(props.rowData)">
+                                @click="confirmDelete(props.rowData)"
+                            >
                                 <i class="fa fa-trash" aria-hidden="true" />
                             </button>
-                        </template>
-                    </vuetable>
-                </div>
+                        </div>
+                    </template>
+                </vuetable>
             </div>
         </div>
     </container-template>
@@ -93,7 +94,7 @@ export default {
             }
 
             this.isLoading = true;
-            let data = { ...device, app: this.appsId };
+            const data = { ...device, app: this.appsId };
 
             axios({
                 url: `users/${this.userData.id}/devices/${device.source_users_id_text}/detach`,

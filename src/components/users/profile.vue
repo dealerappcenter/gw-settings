@@ -1,6 +1,6 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
+        <tabs-menu slot="tab-menu" />
         <template slot="tab-content">
             <h5>General Information</h5>
             <div class="row user-general-information">

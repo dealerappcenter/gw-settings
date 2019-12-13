@@ -24,7 +24,9 @@
                                 <strong>Order Total</strong>
                                 <small>{{ plan.name }} Plan for 1 seat {{ frecuency.title }} payment in USD</small>
                             </div>
-                            <div class="final-price">${{ frecuency.price }}</div>
+                            <div class="final-price">
+                                ${{ frecuency.price }}
+                            </div>
                         </div>
                     </div>
                 </div>

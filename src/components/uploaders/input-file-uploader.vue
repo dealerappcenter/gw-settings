@@ -1,5 +1,5 @@
 <template>
-    <div :id="uppyId" >
+    <div :id="uppyId">
         <button
             :id="buttonInstanceId"
             :class="['uppy-container','btn btn-primary']"
@@ -100,7 +100,7 @@ export default {
         })
 
         uppyInstance.use(XHRUpload, {
-            getResponseData: (responseText, {response}) => {
+            getResponseData: (responseText, { response }) => {
                 this.$emit("uploaded", JSON.parse(responseText), JSON.parse(response));
                 uppyInstance.reset();
             },

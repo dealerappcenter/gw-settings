@@ -4,7 +4,8 @@
             <transition name="fade" mode="out-in">
                 <component
                     :is="currentComponent"
-                    @changeView="changeView"/>
+                    @changeView="changeView"
+                />
             </transition>
         </div>
     </div>

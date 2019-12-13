@@ -1,16 +1,16 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
+        <tabs-menu slot="tab-menu" />
         <div slot="tab-content" class="row branch-general-information">
             <div class="col-12 m-b-20">
                 <h5> {{ title }}</h5>
                 <div class="row">
-                    <div class="col-6 col-md">
+                    <div class="col-12 col-md-6">
                         <div class="form-group form-group-default required">
                             <label>Name</label>
                             <input
-                                v-validate="'required:true|min:2'"
                                 v-model="branchData.name"
+                                v-validate="'required:true|min:2'"
                                 class="form-control"
                                 type="text"
                                 name="name"
@@ -22,8 +22,8 @@
                         <div class="form-group form-group-default required">
                             <label>Address</label>
                             <input
-                                v-validate="'required:true|min:2'"
                                 v-model="branchData.address"
+                                v-validate="'required:true|min:2'"
                                 class="form-control"
                                 type="text"
                                 data-vv-as="branch address"
@@ -36,8 +36,8 @@
                         <div class="form-group form-group-default required">
                             <label>Zip Code</label>
                             <input
-                                v-validate="'required:true|numeric|min:2'"
                                 v-model="branchData.zipcode"
+                                v-validate="'required:true|numeric|min:2'"
                                 class="form-control"
                                 type="text"
                                 data-vv-as="zip code"
@@ -50,8 +50,8 @@
                         <div class="form-group form-group-default required">
                             <label>Email</label>
                             <input
-                                v-validate="'required|email'"
                                 v-model="branchData.email"
+                                v-validate="'required|email'"
                                 class="form-control"
                                 name="email"
                                 type="email"
@@ -63,8 +63,8 @@
                         <div class="form-group form-group-default required">
                             <label>Phone</label>
                             <input
-                                v-validate="'required|numeric'"
                                 v-model="branchData.phone"
+                                v-validate="'required|numeric'"
                                 class="form-control"
                                 data-vv-as="phone number"
                                 name="phone"
@@ -75,12 +75,15 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-6 m-b-20"/>
                 </div>
             </div>
             <div class="col-12 col-xl d-flex justify-content-end mt-2">
-                <button :disabled="isLoading" class="btn btn-danger m-r-10" @click="cancel()">Cancel</button>
-                <button :disabled="isLoading || !hasChanged" class="btn btn-primary" @click="save()">Save</button>
+                <button :disabled="isLoading" class="btn btn-danger mr-2" @click="cancel()">
+                    Cancel
+                </button>
+                <button :disabled="isLoading || !hasChanged" class="btn btn-primary" @click="save()">
+                    Save
+                </button>
             </div>
         </div>
     </container-template>
