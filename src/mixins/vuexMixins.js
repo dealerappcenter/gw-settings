@@ -2,7 +2,7 @@ import { mapGetters } from "vuex";
 
 export default {
     computed: {
-        ...mapGetters("Company", ["currentCompanyId"])
+        ...mapGetters("KANVAS/Company", ["currentCompanyId"])
     },
     watch: {
         currentCompanyId() {
