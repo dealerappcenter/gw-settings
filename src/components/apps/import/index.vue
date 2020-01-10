@@ -1,16 +1,16 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
+        <tabs-menu slot="tab-menu" />
         <div slot="tab-content" class="row import-section">
             <div class="col">
                 <h5>Import</h5>
                 <wizard-form class="wizard-component import-wizard" shape="tab" color="var(--base-color)">
-                    <span slot="title"/>
+                    <span slot="title" />
                     <wizard-tab-content title="Upload" icon="fa fa-file-upload">
-                        <vue-dropzone id="fileUpload" :options="dropzoneOptions"/>
+                        <vue-dropzone id="fileUpload" :options="dropzoneOptions" />
                     </wizard-tab-content>
                     <wizard-tab-content title="Field Mapping" icon="fa fa-map-signs">
-                        <fields-mapping/>
+                        <fields-mapping />
                     </wizard-tab-content>
                     <wizard-tab-content title="Finish" icon="fa fa-check">
                         <h1>Finish</h1>
@@ -56,9 +56,11 @@ import TabsMenu from "../tabs";
 import FieldsMapping from "./fields-mapping";
 import VueDropzone from "vue2-dropzone";
 
-import { FormWizard as WizardForm,
-    TabContent  as WizardTabContent,
-    WizardButton } from "vue-form-wizard";
+import {
+    FormWizard as WizardForm,
+    TabContent as WizardTabContent,
+    WizardButton
+} from "vue-form-wizard";
 
 export default {
     name: "ImportWizard",
@@ -78,7 +80,7 @@ export default {
             }
         };
     }
-};
+}
 </script>
 
 <style lang="scss">

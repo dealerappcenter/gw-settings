@@ -1,27 +1,27 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
-        <div slot="tab-content" class="row">
-            <div class="col">
-                <h5>
-                    Branches
-                    <router-link :to="{ name: 'settingsCompaniesBranchesForm' }" class="btn btn-primary">
-                        New Branch
-                    </router-link>
-                </h5>
-                <div class="table-responsive">
-                    <vuetable
-                        ref="Vuetable"
-                        :append-params="appendParams"
-                        :fields="branchesFields"
-                        :http-fetch="getTableData"
-                        api-url="/companies-branches"
-                        class="table table-hover table-condensed"
-                        pagination-path=""
-                    >
-                        <template slot="actions" slot-scope="props">
-                            <button class="btn btn-complete m-l-5" @click="editBranch(props.rowData.id)">
-                                <i class="fa fa-edit" aria-hidden="true"/>
+        <tabs-menu slot="tab-menu" />
+        <div slot="tab-content">
+            <h5>
+                Branches
+                <router-link :to="{ name: 'settingsCompaniesBranchesForm' }" class="btn btn-primary">
+                    New Branch
+                </router-link>
+            </h5>
+            <div class="table-responsive">
+                <vuetable
+                    ref="Vuetable"
+                    :append-params="appendParams"
+                    :fields="branchesFields"
+                    :http-fetch="getTableData"
+                    api-url="/companies-branches"
+                    class="table table-hover table-condensed"
+                    pagination-path=""
+                >
+                    <template slot="actions" slot-scope="props">
+                        <div class="d-flex align-items-center justify-content-end">
+                            <button class="btn btn-primary m-l-5" @click="editBranch(props.rowData.id)">
+                                <i class="fa fa-edit" aria-hidden="true" />
                             </button>
                             <button
                                 :class="{ 'disable-element': isCurrentBranch(props.rowData.id) }"
@@ -31,9 +31,9 @@
                             >
                                 <i class="fa fa-trash" aria-hidden="true" />
                             </button>
-                        </template>
-                    </vuetable>
-                </div>
+                        </div>
+                    </template>
+                </vuetable>
             </div>
         </div>
     </container-template>

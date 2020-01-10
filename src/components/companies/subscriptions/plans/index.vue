@@ -46,7 +46,7 @@ export default {
         }
     },
     methods: {
-        changePlan(plan){
+        changePlan(plan) {
             if (this.showModal) {
                 this.changeSubscription(plan)
             } else {

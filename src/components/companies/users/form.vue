@@ -1,18 +1,20 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
+        <tabs-menu slot="tab-menu" />
         <div slot="tab-content">
-            <h5 class="form-title">{{ title }}</h5>
+            <h5 class="form-title">
+                {{ title }}
+            </h5>
             <div class="row user-general-information">
                 <div class="col-12 m-b-20">
                     <div class="row">
-                        <div class="col-6 col-md">
+                        <div class="col-12 col-md-6">
                             <template v-if="isEditing">
                                 <div class="form-group form-group-default required">
                                     <label>First name</label>
                                     <input
-                                        v-validate="'required:true|min:2|alpha_spaces'"
                                         v-model="userData.firstname"
+                                        v-validate="'required:true|min:2|alpha_spaces'"
                                         class="form-control"
                                         type="text"
                                         name="firstname"
@@ -23,8 +25,8 @@
                                 <div class="form-group form-group-default required">
                                     <label>Last name</label>
                                     <input
-                                        v-validate="'required:true|min:2|alpha_spaces'"
                                         v-model="userData.lastname"
+                                        v-validate="'required:true|min:2|alpha_spaces'"
                                         data-vv-as="Last Name"
                                         name="lastname"
                                         class="form-control"
@@ -35,8 +37,8 @@
                                 <div class="form-group form-group-default">
                                     <label>Cell phone</label>
                                     <input
-                                        v-validate="'min:2|numeric'"
                                         v-model="userData.cell_phone_number"
+                                        v-validate="'min:2|numeric'"
                                         data-vv-as="Cell phone"
                                         class="form-control"
                                         name="phone"
@@ -48,8 +50,8 @@
                             <div class="form-group form-group-default required">
                                 <label>Email</label>
                                 <input
-                                    v-validate="'required:true|email'"
                                     v-model="userData.email"
+                                    v-validate="'required:true|email'"
                                     data-vv-as="Email"
                                     data-vv-name="email"
                                     class="form-control"
@@ -60,7 +62,7 @@
                             </div>
                         </div>
 
-                        <div class="col-6 m-b-20">
+                        <div class="col-12 col-md-6 m-b-20">
                             <div class="col-12 col-md">
                                 <template v-if="isEditing">
                                     <div class="form-group">
@@ -93,9 +95,9 @@
                                         <span class="multiseletc-required">*</span>
                                     </label>
                                     <multiselect
-                                        v-validate="'required:true'"
                                         v-if="initializeComplete"
                                         v-model="selectedRole"
+                                        v-validate="'required:true'"
                                         :max-height="175"
                                         :options="roles"
                                         :show-labels="false"
@@ -114,7 +116,9 @@
                 </div>
 
                 <div class="col-12 col-xl d-flex justify-content-end mt-2">
-                    <button :disabled="isLoading" class="btn btn-danger m-r-10" @click="cancel()">Cancel</button>
+                    <button :disabled="isLoading" class="btn btn-danger mr-2" @click="cancel()">
+                        Cancel
+                    </button>
                     <button
                         :disabled="isLoading || !hasChanged"
                         class="btn btn-primary"

@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h5 class="form-title">{{ title }}</h5>
+        <h5 class="form-title">
+            {{ title }}
+        </h5>
         <div class="row">
             <div class="col-12 m-b-20">
                 <div class="row">
@@ -109,8 +111,12 @@
             </div>
 
             <div class="col-12 col-xl d-flex justify-content-end mt-2">
-                <button class="btn btn-danger m-r-10" @click="teamsList">Cancel</button>
-                <button class="btn btn-primary" @click="save">Save</button>
+                <button class="btn btn-danger mr-2" @click="teamsList">
+                    Cancel
+                </button>
+                <button class="btn btn-primary" @click="save">
+                    Save
+                </button>
             </div>
         </div>
     </div>

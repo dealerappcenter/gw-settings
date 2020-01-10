@@ -6,7 +6,7 @@
                 <!--HEAD CONTENT START-->
                 <div class="generic_head_content clearfix">
                     <!--HEAD START-->
-                    <div class="head_bg"/>
+                    <div class="head_bg" />
                     <div class="head">
                         <span>{{ plan.name }}</span>
                     </div>
@@ -54,11 +54,12 @@
                 </div>
             </template>
             <!--//BUTTON END-->
-
         </div>
         <div :style="{ opacity : isSelected ? '1' : '0' }" class="selected-plan-details">
             <h5>This is your current plan</h5>
-            <p v-if="isPaid">Your membership will automatically renew on 06/28/20</p>
+            <p v-if="isPaid">
+                Your membership will automatically renew on 06/28/20
+            </p>
         </div>
     </div>
 </template>
@@ -69,15 +70,15 @@ import { mapGetters } from "vuex";
 export default {
     name: "Plan",
     filters: {
-        getPrice(value){
+        getPrice(value) {
             const isNumber = _.isNumber(Number(value));
             let data = 0;
-            if(value && isNumber){
-                data =  value.split(".")[0];
+            if (value && isNumber) {
+                data = value.split(".")[0];
             }
             return data;
         },
-        formatSetting(value){
+        formatSetting(value) {
             return _.startCase(value);
         }
     },

@@ -1,6 +1,6 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
+        <tabs-menu slot="tab-menu" />
         <div slot="tab-content" class="row custom-fields-settings">
             <div class="col">
                 <div class="custom-fields">

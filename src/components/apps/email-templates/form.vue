@@ -9,12 +9,13 @@
                         <div class="form-group  required">
                             <label>Title</label>
                             <input
-                                v-validate="'required'"
                                 v-model="formData.name"
+                                v-validate="'required'"
                                 class="form-control"
                                 type="text"
                                 name="name"
-                                placeholder="Title for email template">
+                                placeholder="Title for email template"
+                            >
                             <span class="error">{{ errors.first("name") }}</span>
                         </div>
                     </div>
@@ -29,11 +30,12 @@
                 <div class="row">
                     <div class="col">
                         <quill-editor
-                            v-validate="'required'"
                             ref="editor"
                             v-model="formData.template"
+                            v-validate="'required'"
                             class="template-editor"
-                            name="template" />
+                            name="template"
+                        />
                         <span class="error">{{ errors.first("template") }}</span>
                     </div>
                 </div>
@@ -42,41 +44,50 @@
                         <div class="checkbox check-success">
                             <label for="checkbox1-test">Test</label>
                             <input
-                                v-validate="''"
                                 :id="`checkbox1-test`"
-                                :name="'checkbox1-test'"
                                 v-model="sendTest"
+                                v-validate="''"
+                                :name="'checkbox1-test'"
                                 :checked="sendTest"
-                                type="checkbox">
+                                type="checkbox"
+                            >
                         </div>
-                        <button :disabled="isLoading" class="btn btn-danger m-r-10" @click="triggerCancel">Cancel</button>
-                        <button v-show="!sendTest" class="btn btn-primary" @click="verifyFields()">Save</button>
+                        <button :disabled="isLoading" class="btn btn-danger m-r-10" @click="triggerCancel">
+                            Cancel
+                        </button>
+                        <button v-show="!sendTest" class="btn btn-primary" @click="verifyFields()">
+                            Save
+                        </button>
                     </div>
                     <div v-if="sendTest" class="col-12 col-xl">
                         <div class="checkbox check-success">
                             <label for="checkbox1-test">Test</label>
                             <input
                                 :id="`checkbox1-test`"
-                                :name="'checkbox1-test'"
                                 v-model="sendTest"
+                                :name="'checkbox1-test'"
                                 checked="checked"
-                                type="checkbox">
+                                type="checkbox"
+                            >
                         </div>
                         <div class="form-group">
                             <label>Emails</label>
                             <multiselect
-                                v-validate="'required:true|email:true'"
                                 v-model="selectedEmails"
+                                v-validate="'required:true|email:true'"
                                 :taggable="true"
                                 :multiple="true"
                                 :show-labels="false"
                                 :options="emailsOptions"
                                 data-vv-as="test email"
                                 data-vv-name="test email"
-                                @tag="setEmails" />
+                                @tag="setEmails"
+                            />
                             <span class="text-danger">{{ errors.first("test email") }}</span>
                         </div>
-                        <button class="btn btn-info " @click="verifyFields()"> Test</button>
+                        <button class="btn btn-info " @click="verifyFields()">
+                            Test
+                        </button>
                     </div>
                 </div>
             </div>
@@ -147,27 +158,23 @@ export default {
     },
     methods: {
         getEmailTemplate() {
-            let url = `/email-templates/${this.$route.params.id}`;
             axios({
-                url
-            }).then(({
-                data
-            }) => this.formData = data)
-                .catch((error) => {
-                    this.notifyError(error);
-                    this.cancel();
-                });
+                url: `/email-templates/${this.$route.params.id}`
+            }).then(({ data }) => {
+                this.formData = data
+            }).catch((error) => {
+                this.notifyError(error);
+                this.cancel();
+            });
         },
         getEmailTemplateVariables() {
-            let url = `/templates-variables`;
             axios({
-                url
-            }).then(({
-                data
-            }) => this.templateVariables = data)
-                .catch((error) => {
-                    this.notifyError(error);
-                });
+                url: "/templates-variables"
+            }).then(({ data }) => {
+                this.templateVariables = data;
+            }).catch((error) => {
+                this.notifyError(error);
+            });
         },
         verifyFields() {
             let dialogProps = {
@@ -182,11 +189,9 @@ export default {
                 };
             }
             if (this.errors.items.length) {
-                let verificationMessage = this.errors.items[0].msg;
-                let verificationTitle = `Please verify the ${this.errors.items[0].field}`;
                 this.$notify({
-                    title: verificationTitle,
-                    text: verificationMessage,
+                    title: this.errors.items[0].msg,
+                    text: `Please verify the ${this.errors.items[0].field}`,
                     type: "warn"
                 });
             } else {
@@ -234,7 +239,7 @@ export default {
         prepareData() {
             const data = new FormData();
             if (this.sendTest) {
-                let emails = this.selectedEmails.join(",");
+                const emails = this.selectedEmails.join(",");
                 data.append("emails", emails);
             }
             Object.keys(this.formData).forEach((field) => {
@@ -274,16 +279,19 @@ export default {
             });
         },
         groupVariables(group = []) {
-            let chunks = [];
-            let clone = [...group];
-            let chunkSize = Math.round(group.length || 4 / 4)
+            const chunks = [];
+            const clone = [...group];
+            const chunkSize = Math.round(group.length || 4 / 4);
+
             while (clone.length) {
                 chunks.push(clone.splice(0, chunkSize));
             }
+
             return chunks;
         },
         insertIntoQuill(apiVariable = "") {
-            let selection = this.quillEditor.getSelection(true);
+            const selection = this.quillEditor.getSelection(true);
+
             if (selection.index) {
                 this.quillEditor.insertText(selection.index, "${" + apiVariable + "}");
             }
@@ -297,8 +305,8 @@ export default {
             });
         },
         setEmails(tag) {
-            this.emailsOptions.push(tag)
-            this.selectedEmails.push(tag)
+            this.emailsOptions.push(tag);
+            this.selectedEmails.push(tag);
         }
     }
 }

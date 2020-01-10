@@ -7,7 +7,8 @@
                 :checked="isSelected"
                 type="radio"
                 name="payment-frecuency"
-                @click.stop="()=> $emit('selectfrequency',billingFrecuency)">
+                @click.stop="()=> $emit('selectfrequency',billingFrecuency)"
+            >
             <label :for="billingFrecuency.type">
                 Pay {{ billingFrecuency.title }}
                 <small>${{ billingFrecuency.price }} per seat per {{ billingFrecuency.frecuency }}</small>

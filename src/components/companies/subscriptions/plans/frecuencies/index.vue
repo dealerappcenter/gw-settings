@@ -6,7 +6,8 @@
                 v-for="frecuency in billingFrecuencies"
                 :key="frecuency.type"
                 class="col-12 col-xl-4"
-                @click.stop="selectBilling(frecuency)">
+                @click.stop="selectBilling(frecuency)"
+            >
                 <frecuency-item
                     :billing-frecuency="frecuency"
                     :is-selected="selectedFrecuency == frecuency.type"
@@ -22,11 +23,14 @@
                                     <input
                                         type="text"
                                         class="form-control"
-                                        placeholder="Redeem a coupon">
+                                        placeholder="Redeem a coupon"
+                                    >
                                 </div>
                             </div>
                             <div class="col-12 col-sm-auto">
-                                <button type="button" class="btn btn-block btn-primary">Redeem</button>
+                                <button type="button" class="btn btn-block btn-primary">
+                                    Redeem
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -90,16 +94,16 @@ export default {
             }
         }
     },
-    mounted(){
+    mounted() {
         this.formatFrecuencys();
     },
     methods: {
         formatFrecuencys() {
-            let monthly = this.plan.pricing || "1";
+            const monthly = this.plan.pricing || "1";
             this.pricingMonthly.price = `${monthly}`;
-            this.pricingAnual.price = this.plan.pricing_anual || `${monthly* 10}`;
+            this.pricingAnual.price = this.plan.pricing_anual || `${monthly * 10}`;
         },
-        selectBilling(billing){
+        selectBilling(billing) {
             this.$emit("selectbillingtype", billing.title, billing);
         }
     }

@@ -1,11 +1,13 @@
 <template>
     <container-template>
-        <tabs-menu slot="tab-menu"/>
+        <tabs-menu slot="tab-menu" />
         <div slot="tab-content" class="row webhooks-section">
             <div class="col">
                 <h5>
                     Webhooks
-                    <router-link :to="{ name: 'settingsAppsWebhooksForm' }" class="btn btn-primary">Create</router-link>
+                    <router-link :to="{ name: 'settingsAppsWebhooksForm' }" class="btn btn-primary">
+                        Create
+                    </router-link>
                 </h5>
                 <div class="table-responsive">
                     <vuetable
@@ -15,15 +17,20 @@
                         :http-fetch="getTableData"
                         api-url="/user-webhooks"
                         class="table table-hover table-condensed"
-                        pagination-path="">
-
+                        pagination-path=""
+                    >
                         <template slot="actions" slot-scope="props">
-                            <button class="btn btn-complete m-l-5" @click="editWebhook(props.rowData)"><i class="fa fa-edit" aria-hidden="true"/></button>
-                            <button
-                                class="btn btn-danger m-l-5"
-                                @click="confirmDeleteWebhook(props.rowData)">
-                                <i class="fa fa-trash" aria-hidden="true" />
-                            </button>
+                            <div class="d-flex align-items-center justify-content-end">
+                                <button class="btn btn-complete m-l-5" @click="editWebhook(props.rowData)">
+                                    <i class="fa fa-edit" aria-hidden="true" />
+                                </button>
+                                <button
+                                    class="btn btn-danger m-l-5"
+                                    @click="confirmDeleteWebhook(props.rowData)"
+                                >
+                                    <i class="fa fa-trash" aria-hidden="true" />
+                                </button>
+                            </div>
                         </template>
                     </vuetable>
                 </div>
@@ -48,12 +55,12 @@ export default {
         vuexMixins,
         listMixins
     ],
-    data(){
-        return{
+    data() {
+        return {
             appendParams:{
                 format: "true",
-                relationships:"webhooks",
-                q:"(is_deleted:0)"
+                relationships: "webhooks",
+                q: "(is_deleted:0)"
             },
             webhooksFields: [{
                 name: "webhooks.name",
@@ -84,13 +91,18 @@ export default {
             });
         },
         editWebhook(userWebhook) {
-            this.$router.push({ name: "settingsAppsWebhooksFormEdit", params:{id:userWebhook.id} });
+            this.$router.push({
+                name: "settingsAppsWebhooksFormEdit",
+                params: {
+                    id: userWebhook.id
+                }
+            });
         },
-        confirmDeleteWebhook(userWebhook){
+        confirmDeleteWebhook(userWebhook) {
             this.$modal.show("basic-modal", {
-                title:"Delete Webhook",
-                message:`Did you want to delete  webhook ?`,
+                title: "Delete Webhook",
                 // message:`Did you want to delete ${userWebhook.webhook.name} webhook ?`,
+                message: "Did you want to delete webhook?",
                 buttons: [{
                     title: "Accept",
                     class: "btn-success",
@@ -127,7 +139,7 @@ export default {
                 });
             }).finally(() => {
                 this.$refs.Vuetable.reload();
-            })
+            });
         }
     }
 };

@@ -1,5 +1,5 @@
 <template>
-    <div :id="uppyId" >
+    <div :id="uppyId">
         <button
             :id="buttonInstanceId"
             :class="['uppy-container', dashboardInstanceId, {'btn btn-primary btn-block': modalButton}]"
@@ -91,7 +91,7 @@ export default {
             autoProceed: false,
             debug: false,
             meta: {
-                atributes: JSON.stringify({ "key": "value"})
+                atributes: JSON.stringify({ "key": "value" })
             },
             ...this.uppyConfig,
             restrictions
@@ -120,14 +120,14 @@ export default {
             });
         }
 
-        if ( Object.keys(this.urlPlugginConfig).some(item => item == "companionUrl") ) {
+        if (Object.keys(this.urlPlugginConfig).some(item => item == "companionUrl")) {
             uppyInstance.use(Url, {
                 target: Dashboard,
                 ...this.urlPlugginConfig
             });
         }
 
-        if ( Object.keys(this.googleDrivePluginConfig).some(item => item == "companionUrl") ) {
+        if (Object.keys(this.googleDrivePluginConfig).some(item => item == "companionUrl")) {
             uppyInstance.use(GoogleDrive, {
                 target: Dashboard,
                 ...this.googleDrivePluginConfig
@@ -157,7 +157,7 @@ export default {
         this.uppyInstance = uppyInstance;
     },
     methods:{
-        resetDashboard(){
+        resetDashboard() {
             this.uppyInstance.reset();
             const dashboard = this.uppyInstance.getPlugin(this.dashboardInstanceId);
             if (dashboard.isModalOpen()) {
